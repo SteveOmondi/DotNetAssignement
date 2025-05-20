@@ -1,4 +1,7 @@
-﻿namespace OrderManagementSystem.Domain.Customers.Entities
+﻿using OrderManagementSystem.Domain.Customers.ValueObjects;
+using OrderManagementSystem.Domain.Orders.Entities;
+
+namespace OrderManagementSystem.Domain.Customers.Entities
 {
     public class Customer
     {
@@ -6,6 +9,8 @@
         public string Name { get; private set; }
         public string Email { get; private set; }
         public Address Address { get; private set; }
+        public List<Order> OrderHistory { get; private set; } = new();
+
 
         public Customer(string name, string email, Address address)
         {
@@ -19,5 +24,14 @@
         {
             Address = newAddress;
         }
+
+        public CustomerSegment GetSegment()
+        {
+            if (OrderHistory.Count == 0) return CustomerSegment.NewCustomer;
+            if (OrderHistory.Count >= 5) return CustomerSegment.LoyalCustomer;
+            if (OrderHistory.Sum(o => o.GetTotalPrice()) > 5000) return CustomerSegment.HighSpendingCustomer;
+            return CustomerSegment.LoyalCustomer;
+        }
+
     }
 }

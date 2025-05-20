@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OrderManagementSystem.Domain.Customers.Entities;
 using OrderManagementSystem.Domain.Orders.Entities;
+using OrderManagementSystem.Domain.Promotions.Entities;
 
 namespace OrderManagementSystem.Infrastructure.Persistence
 {
@@ -11,6 +12,9 @@ namespace OrderManagementSystem.Infrastructure.Persistence
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
+        public DbSet<SeasonalPromotion> SeasonalPromotions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
