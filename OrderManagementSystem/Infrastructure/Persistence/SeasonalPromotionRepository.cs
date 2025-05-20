@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OrderManagementSystem.Domain.Promotions.Entities;
-using OrderManagementSystem.Infrastructure.Persistence;
+using OrderManagementSystem.Domain.Promotions.Repositories;
 
 namespace OrderManagementSystem.Infrastructure.Persistence
 {
-    public class SeasonalPromotionRepository
+    public class SeasonalPromotionRepository : ISeasonalPromotionRepository
     {
         private readonly OrderDbContext _context;
 
